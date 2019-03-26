@@ -13,7 +13,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-#include "sema_manager.hh"
 #include "filesystem.hh"
 #include "include_complete.hh"
 #include "log.hh"
@@ -21,6 +20,7 @@ limitations under the License.
 #include "pipeline.hh"
 #include "platform.hh"
 #include "project.hh"
+#include "sema_manager.hh"
 #include "working_files.hh"
 
 #include <llvm/ADT/Twine.h>
@@ -29,8 +29,8 @@ limitations under the License.
 #include <rapidjson/document.h>
 #include <rapidjson/writer.h>
 
-#include <stdlib.h>
 #include <stdexcept>
+#include <stdlib.h>
 #include <thread>
 
 namespace ccls {
@@ -110,15 +110,21 @@ REFLECT_STRUCT(ServerCap::SaveOptions, includeText);
 REFLECT_STRUCT(ServerCap::SignatureHelpOptions, triggerCharacters);
 REFLECT_STRUCT(ServerCap::TextDocumentSyncOptions, openClose, change, willSave,
                willSaveWaitUntil, save);
-REFLECT_STRUCT(ServerCap, textDocumentSync, hoverProvider, completionProvider,
-               signatureHelpProvider, definitionProvider,
+REFLECT_STRUCT(ServerCap, textDocumentSync,
+               // hoverProvider,
+               // completionProvider,
+               // signatureHelpProvider,
+               // definitionProvider,
                implementationProvider, typeDefinitionProvider,
-               referencesProvider, documentHighlightProvider,
+               referencesProvider,
+               // documentHighlightProvider,
                documentSymbolProvider, workspaceSymbolProvider,
-               codeActionProvider, codeLensProvider, documentFormattingProvider,
-               documentRangeFormattingProvider,
-               documentOnTypeFormattingProvider, renameProvider,
-               documentLinkProvider, foldingRangeProvider,
+               // codeActionProvider,
+               codeLensProvider,
+               // documentFormattingProvider,
+               // documentRangeFormattingProvider,
+               // documentOnTypeFormattingProvider,
+               renameProvider, documentLinkProvider, foldingRangeProvider,
                executeCommandProvider, workspace);
 
 struct DynamicReg {
@@ -184,7 +190,8 @@ REFLECT_STRUCT(TextDocumentClientCap::DocumentSymbol,
                hierarchicalDocumentSymbolSupport);
 REFLECT_STRUCT(TextDocumentClientCap::LinkSupport, linkSupport);
 REFLECT_STRUCT(TextDocumentClientCap::PublishDiagnostics, relatedInformation);
-REFLECT_STRUCT(TextDocumentClientCap, completion, definition, documentSymbol, publishDiagnostics);
+REFLECT_STRUCT(TextDocumentClientCap, completion, definition, documentSymbol,
+               publishDiagnostics);
 
 struct ClientCap {
   WorkspaceClientCap workspace;
