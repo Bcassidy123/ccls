@@ -72,6 +72,7 @@ struct ServerCap {
   struct SignatureHelpOptions {
     std::vector<const char *> triggerCharacters = {"(", ","};
   } signatureHelpProvider;
+  bool declarationProvider = true;
   bool definitionProvider = true;
   bool typeDefinitionProvider = true;
   bool implementationProvider = true;
